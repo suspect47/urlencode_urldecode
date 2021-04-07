@@ -1,5 +1,5 @@
 !/bin/bash
-function urlencode { local dataLength="${#1}"; local index; for ((index = 0;index < dataLength;index++)); do local char="${1:index:1}"; case $char in [a-zA-Z0-9.~_-]) printf "$char"; ;; *) printf "%%%0>
+function urlencode() { local dataLength="${#1}"; local index; for ((index = 0;index < dataLength;index++)); do local char="${1:index:1}"; case $char in [a-zA-Z0-9.~_-]) printf "$char"; ;; *) printf "%%%02X" "'$char"; ;; esac; done; }
 function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 
 echo "urlencode:"
